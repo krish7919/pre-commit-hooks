@@ -18,8 +18,14 @@ help:
 	@echo -e "\n${green}TARGETS:${white}\n"
 	@echo -e "  ${yellow}init${white} - Initialize the project"
 	@echo -e "  ${yellow}help${white} - Display this help message"
+	@echo -e "  ${yellow}lint${white} - Run linters"
 
 init:
 	pre-commit clean
 	pre-commit install
 	pre-commit install -t commit-msg
+
+lint:
+	@cd stinker && golangci-lint \
+		--config="$(ROOT_DIR)/.golangci.yaml" \
+		run

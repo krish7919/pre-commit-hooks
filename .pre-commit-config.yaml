@@ -12,21 +12,6 @@ repos:
         entry: yamllint
         types: [file]
         files: \.(yaml|yml)$
-  # TODO
-  # - repo: https://github.com/golangci/golangci-lint
-  #   rev: v1.63.4
-  #   hooks:
-  #     - id: golangci-lint
-  #       name: golangci-lint
-  #       entry: golangci-lint run
-  #       args:
-  #         - --config="./.golangci.yml"
-  #         # Run golangci-lint for these directories.
-  #         - ./stinker
-  #       types: [file]
-  #       files: \.(go)$
-  #       language: golang
-  #       pass_filenames: false
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
@@ -89,3 +74,18 @@ repos:
         types: [file]
         files: \.(go)$
         language: system
+      - id: commit-msg-validate
+        name: commit-msg-validate
+        description: Validate git commit message
+        entry: go run stinker/main.go commit-msg-validate
+          --regexp='^(build|ci|docs|feat|fix|test):\s[a-z].*'
+        stages: [commit-msg]
+        language: system
+      - id: lint
+        name: lint
+        description: Run golangci-lint for the stinker package.
+        entry: make lint
+        types: [file]
+        files: \.(go)$
+        language: golang
+        pass_filenames: false
