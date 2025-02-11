@@ -41,12 +41,14 @@ func runCommitMsgCmd(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	// pre-commit passes a file name ".git/COMMIT_EDITMSG" as an argument, which
-	// contains the commit message.
-	if args[0] != ".git/COMMIT_EDITMSG" {
-		fmt.Printf("invalid filename, expected: '.git/COMMIT_EDITMSG', got: '%s'", args[0])
-		os.Exit(1)
-	}
+	// Commenting the following code as its easier to test without this check.
+	//
+	// // pre-commit passes a file name ".git/COMMIT_EDITMSG" as an argument, which
+	// // contains the commit message.
+	// if args[0] != ".git/COMMIT_EDITMSG" {
+	// 	fmt.Printf("invalid filename, expected: '.git/COMMIT_EDITMSG', got: '%s'", args[0])
+	// 	os.Exit(1)
+	// }
 
 	// Fetch the commit message from the filename
 	// passed as argument.
